@@ -60,8 +60,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	
 		http.authorizeRequests()
-		.antMatchers("/api/employees/add").hasAuthority("ADMIN")
+		.antMatchers(HttpMethod.POST,"/api/employees").hasAuthority("ADMIN")
+		.antMatchers(HttpMethod.PUT,"/api/employees").hasAuthority("ADMIN")
 		.antMatchers(HttpMethod.DELETE,"/api/employees/**").hasAuthority("ADMIN")
+		.antMatchers(HttpMethod.POST,"/api/roles").hasAuthority("ADMIN")
+		.antMatchers(HttpMethod.POST,"/api/user").hasAuthority("ADMIN")
 		.antMatchers(HttpMethod.GET,"/api/employees/**").permitAll()
 		.antMatchers("/**").permitAll()
 		.and()

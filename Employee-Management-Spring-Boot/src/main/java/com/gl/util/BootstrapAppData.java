@@ -22,17 +22,28 @@ public class BootstrapAppData {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	@EventListener(ApplicationReadyEvent.class)
-	public void insertEmployees(ApplicationReadyEvent event)
+	public void insertAdmin(ApplicationReadyEvent event)
 	{
 		User admin=new User();
 		admin.setUsername("admin");
 		admin.setPassword(passwordEncoder.encode("admin"));
 		Role adminRole=new Role();
 		adminRole.setName("ADMIN");
-		List list=new ArrayList<>();
+		List<Role> list=new ArrayList<>();
 		list.add(adminRole);
 		admin.setRoles(list);
 		userRepository.saveAndFlush(admin);
+		
+		
+		User user=new User();
+		user.setUsername("user");
+		user.setPassword(passwordEncoder.encode("user"));
+		Role userRole=new Role();
+		userRole.setName("USER");
+		List<Role> list1=new ArrayList<>();
+		list.add(userRole);
+		admin.setRoles(list1);
+		userRepository.saveAndFlush(user);
 	}
 	
 }
