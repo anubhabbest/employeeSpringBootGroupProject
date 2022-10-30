@@ -41,15 +41,15 @@ public class EmployeeService {
 		return employeeRepository.findByFirstName(username);
 	}
 	
-	public List<Employee> listAllEmployeesSortedByUsernameAsc(String firstName)
+	public List<Employee> listAllEmployeesSortedByUsernameAsc(Direction direction)
 	{
-		return employeeRepository.findAll(Sort.by(firstName));
+		return employeeRepository.findAll(Sort.by(direction,"firstName"));
 	}
 	
-	public List<Employee> listAllEmployeesSortedByUsernameDesc(String firstName)
-	{
-		return employeeRepository.findAll(Sort.by(Direction.DESC,firstName));
-	}
-	
+//	public List<Employee> listAllEmployeesSortedByUsernameDesc(String firstName)
+//	{
+//		return employeeRepository.findAll(Sort.by(Direction.DESC,firstName));
+//	}
+//	
 	
 }

@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gl.entity.Employee;
@@ -53,9 +55,15 @@ public class HomeController {
 	{
 		return employeeService.fetchEmployeeByFirstName(username);		
 	}
-//	@GetMapping()
-//	public List<Employee> listAllEmployeesSortedByUsernameAsc(String firstName)
-//	{
-//		
-//	}
+	@GetMapping("/employees/sort")
+	public List<Employee> listAllEmployeesSortedByUsername(@RequestParam(value="order") String order)
+	{
+			if(order.equals("desc"))
+				return employeeService.listAllEmployeesSortedByUsernameAsc(Direction.DESC);
+			else 
+				return employeeService.listAllEmployeesSortedByUsernameAsc(Direction.ASC);
+			
+			
+	}
+	
 }
